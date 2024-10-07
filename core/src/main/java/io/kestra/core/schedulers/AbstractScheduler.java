@@ -412,7 +412,6 @@ public abstract class AbstractScheduler implements Scheduler, Service {
 
             triggers.forEach(trigger -> schedulableNextDate.remove(trigger.uid()));
             List<Trigger> triggerContextsToEvaluate = triggers.stream()
-                .filter(trigger -> Boolean.FALSE.equals(trigger.getDisabled()))
                 .toList();
 
             List<FlowWithTriggers> schedulable = this.computeSchedulable(flowListeners.flows(), triggerContextsToEvaluate, scheduleContext);
