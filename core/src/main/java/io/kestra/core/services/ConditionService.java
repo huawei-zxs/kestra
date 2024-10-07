@@ -28,8 +28,13 @@ import static io.kestra.core.utils.Rethrow.throwPredicate;
  */
 @Singleton
 public class ConditionService {
-    @Inject
-    private RunContextFactory runContextFactory;
+    private final RunContextFactory runContextFactory;
+    private final FlowTriggerService flowTriggerService;
+
+    public ConditionService(RunContextFactory runContextFactory, FlowTriggerService flowTriggerService) {
+        this.runContextFactory = runContextFactory;
+        this.flowTriggerService = flowTriggerService;
+    }
 
     @VisibleForTesting
     public boolean isValid(Condition condition, Flow flow, @Nullable Execution execution, MultipleConditionStorageInterface multipleConditionStorage) {

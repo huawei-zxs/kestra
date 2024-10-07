@@ -21,14 +21,15 @@ import java.util.stream.Stream;
 
 @Singleton
 public class FlowTriggerService {
-    @Inject
-    private ConditionService conditionService;
+    private final ConditionService conditionService;
+    private final RunContextFactory runContextFactory;
+    private final FlowService flowService;
 
-    @Inject
-    private RunContextFactory runContextFactory;
-
-    @Inject
-    private FlowService flowService;
+    public FlowTriggerService(ConditionService conditionService, RunContextFactory runContextFactory, FlowService flowService) {
+        this.conditionService = conditionService;
+        this.runContextFactory = runContextFactory;
+        this.flowService = flowService;
+    }
 
     public Stream<FlowWithFlowTrigger> withFlowTriggersOnly(Stream<Flow> allFlows) {
         return allFlows
