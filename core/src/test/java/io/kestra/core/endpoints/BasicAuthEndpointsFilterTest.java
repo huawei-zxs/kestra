@@ -75,6 +75,17 @@ class BasicAuthEndpointsFilterTest {
     }
 
     @Test
+    void withPasswordCaseSensitiveKo() {
+        test(true, (client, httpRequest) -> {
+            HttpClientResponseException e = assertThrows(HttpClientResponseException.class, () -> {
+                client.toBlocking().exchange(httpRequest.basicAuth("foo", "BAR"));
+            });
+
+            assertThat(e.getStatus(), is(HttpStatus.UNAUTHORIZED));
+        });
+    }
+
+    @Test
     void withoutPasswordOk() {
         test(false, (client, httpRequest) -> {
             HttpResponse<String> response = client.toBlocking().exchange(httpRequest);

@@ -53,7 +53,7 @@ public class BasicAuthEndpointsFilter implements HttpServerFilter {
             final String[] values = credentials.split(":", 2);
             if (values.length == 2) {
                 return this.endpointBasicAuthConfiguration.getUsername().equals(values[0]) &&
-                    this.endpointBasicAuthConfiguration.getPassword().equals(values[1]);
+                    this.endpointBasicAuthConfiguration.getPassword().equalsIgnoreCase(values[1]);
             }
         }
 
