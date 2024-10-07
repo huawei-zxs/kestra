@@ -49,6 +49,9 @@ public class JsonSchemaGenerator {
     private final PluginRegistry pluginRegistry;
 
     @Inject
+    private DocumentationGenerator documentationGenerator;
+
+    @Inject
     public JsonSchemaGenerator(final PluginRegistry pluginRegistry) {
         this.pluginRegistry = pluginRegistry;
     }
