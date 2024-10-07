@@ -175,4 +175,24 @@ class FileSerdeTest {
     }
 
     private record SimpleEntry(long id, String value) {}
+
+    @Test
+    void ion_wholeHourUtcInstant() throws IOException {
+        Map<String, Object> object = new HashMap<>();
+        object.put("key", Instant.parse("2008-12-25T15:00:00Z"));
+
+        File tempFile = File.createTempFile(this.getClass().getSimpleName().toLowerCase() + "_", ".ion");
+        try (FileOutputStream outputStream = new FileOutputStream(tempFile)) {
+            FileSerde.write(outputStream, object);
+        }
+
+        BufferedReader inputStream = new BufferedReader(new FileReader(tempFile));
+
+        Map<String, Object> result = Flux
+            .create(FileSerde.reader(inputStream), FluxSink.OverflowStrategy.BUFFER)
+            .map(o -> (Map<String, Object>) o)
+            .blockFirst();
+
+        assertThat(result.get("key"), is(Instant.parse("2008-12-25T15:00:00Z")));
+    }
 }

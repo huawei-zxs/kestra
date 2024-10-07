@@ -55,7 +55,7 @@ public class IonParser extends com.fasterxml.jackson.dataformat.ion.IonParser {
                 ZoneOffset zoneOffset = timestamp.getLocalOffset() == null ? null : ZoneOffset.ofTotalSeconds(timestamp.getLocalOffset() * 60);
 
                 if (zoneOffset == null || zoneOffset.getId().equals("Z")) {
-                    if (instant.truncatedTo(ChronoUnit.DAYS) == instant) {
+                    if (instant.truncatedTo(ChronoUnit.HOURS) == instant) {
                         return LocalDate.ofInstant(instant, ZoneId.of("UTC"));
                     }
 
