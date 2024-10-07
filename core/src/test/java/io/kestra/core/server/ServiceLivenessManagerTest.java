@@ -63,8 +63,8 @@ public class ServiceLivenessManagerTest {
         this.serviceLivenessManager = new ServiceLivenessManager(
             config,
             new ServiceRegistry(),
-            new LocalServiceStateFactory(config,  new ServerInstanceFactory(context, null)),
-            new ServerInstanceFactory(kestraContext, null),
+            new LocalServiceStateFactory(config,  new ServerInstanceFactory(context, null, null)),
+            new ServerInstanceFactory(kestraContext, null, null),
             repository,
             onStateTransitionFailureCallback
         );

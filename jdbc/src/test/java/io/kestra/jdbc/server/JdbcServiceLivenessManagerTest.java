@@ -63,7 +63,7 @@ class JdbcServiceLivenessManagerTest {
             config,
             new ServiceRegistry(),
             new LocalServiceStateFactory(config, null),
-            new ServerInstanceFactory(context, null),
+            new ServerInstanceFactory(context, null, null),
             repository
         );
     }

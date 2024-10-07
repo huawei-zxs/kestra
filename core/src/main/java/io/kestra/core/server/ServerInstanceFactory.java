@@ -22,11 +22,15 @@ public class ServerInstanceFactory {
 
     private final Environment environment;
 
+    private final LocalServiceStateFactory localServiceStateFactory;
+
     @Inject
     public ServerInstanceFactory(final KestraContext context,
-                                 final Environment environment) {
+                                 final Environment environment,
+                                 final LocalServiceStateFactory localServiceStateFactory) {
         this.context = Objects.requireNonNull(context, "KestraContext cannot be null");
         this.environment = environment;
+        this.localServiceStateFactory = localServiceStateFactory;
     }
 
     /**
