@@ -37,7 +37,7 @@ import java.util.TimeZone;
 public final class JacksonMapper {
     public static final TypeReference<Map<String, Object>> MAP_TYPE_REFERENCE = new TypeReference<>() {};
     public static final TypeReference<List<Object>> LIST_TYPE_REFERENCE = new TypeReference<>() {};
-    public static final TypeReference<Object> OBJECT_TYPE_REFERENCE = new TypeReference<>() {};
+    public static final TypeReference<Map<String, Object>> OBJECT_TYPE_REFERENCE = new TypeReference<>() {};
 
     private JacksonMapper() {}
 
