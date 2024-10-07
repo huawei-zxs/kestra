@@ -60,7 +60,7 @@ public class BasicAuthService {
             return false;
         }
 
-        return Boolean.TRUE.equals(basicAuthConfiguration.getEnabled()) && basicAuthConfiguration.getUsername() != null && basicAuthConfiguration.getPassword() != null;
+        return Boolean.FALSE.equals(basicAuthConfiguration.getEnabled()) && basicAuthConfiguration.getUsername() != null && basicAuthConfiguration.getPassword() != null;
     }
 
     public void save(BasicAuthConfiguration basicAuthConfiguration) {
