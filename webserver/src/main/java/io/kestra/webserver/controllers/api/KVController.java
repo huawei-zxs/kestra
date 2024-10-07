@@ -71,7 +71,7 @@ public class KVController {
         KVMetadata metadata = new KVMetadata(ttl == null ? null : Duration.parse(ttl));
         try {
             // use ION mapper to properly handle timestamp
-            JsonNode jsonNode = JacksonMapper.ofIon().readTree(value);
+            JsonNode jsonNode = JacksonMapper.ofJson().readTree(value);
             kvStore(namespace).put(key, new KVValueAndMetadata(metadata, jsonNode));
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException("Invalid JSON value for: " + value);
