@@ -58,4 +58,13 @@ class AuthenticationFilterTest {
 
         assertThat(response.getStatus(), is(HttpStatus.OK));
     }
+
+    @Test
+    void testInvalidPasswordRejected() {
+        assertThrows(HttpClientResponseException.class, () -> client.toBlocking()
+            .exchange(HttpRequest.GET("/api/v1/configs").basicAuth(
+                basicAuthConfiguration.getUsername(),
+                "invalid-password"
+            )));
+    }
 }
