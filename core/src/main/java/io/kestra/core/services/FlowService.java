@@ -144,10 +144,6 @@ public class FlowService {
     }
 
     public List<String> warnings(Flow flow) {
-        if (flow == null) {
-            return Collections.emptyList();
-        }
-
         List<String> warnings = new ArrayList<>();
         List<AbstractTrigger> triggers = flow.getTriggers();
         if (

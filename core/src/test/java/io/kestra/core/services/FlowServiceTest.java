@@ -185,6 +185,13 @@ class FlowServiceTest {
     }
 
     @Test
+    void warningsWithNullFlow() {
+        List<String> warnings = flowService.warnings(null);
+
+        assertThat(warnings.size(), is(0));
+    }
+
+    @Test
     void warnings() {
         Flow flow = create("test", "test", 1).toBuilder()
             .namespace("system")
