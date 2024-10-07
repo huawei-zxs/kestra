@@ -154,6 +154,21 @@ public abstract class AbstractJdbcServiceInstanceRepositoryTest {
     }
 
     @Test
+    void shouldReturnSucceedTransitionResponseForCreatedToDisconnected() {
+        // Given
+        ServiceInstance instance = Fixtures.CreatedServiceInstance;
+        repository.save(instance);
+
+        // When
+        ServiceStateTransition.Response response = repository
+            .mayTransitionServiceTo(instance, Service.ServiceState.DISCONNECTED); // CREATED -> DISCONNECTED: valid transition
+
+        // Then
+        Assertions.assertEquals(SUCCEED, response.result());
+        Assertions.assertEquals(Service.ServiceState.DISCONNECTED, response.instance().state());
+    }
+
+    @Test
     void shouldReturnInvalidTransitionResponseForInvalidTransition() {
         // Given
         ServiceInstance instance = Fixtures.EmptyServiceInstance;
@@ -193,6 +208,9 @@ public abstract class AbstractJdbcServiceInstanceRepositoryTest {
         public static List<ServiceInstance> allInNotRunningState() {
             return List.of(NotRunningServiceInstance);
         }
+
+        public static final ServiceInstance CreatedServiceInstance =
+            serviceInstanceFor(Service.ServiceState.CREATED);
 
         public static final ServiceInstance RunningServiceInstance =
             serviceInstanceFor(Service.ServiceState.RUNNING);

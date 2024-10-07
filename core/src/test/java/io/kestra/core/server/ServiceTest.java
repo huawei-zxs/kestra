@@ -8,6 +8,16 @@ import java.util.List;
 class ServiceTest {
 
     @Test
+    void shouldReturnValidTransitionForCreated() {
+        List<Service.ServiceState> states = List.of(
+            Service.ServiceState.CREATED,
+            Service.ServiceState.RUNNING,
+            Service.ServiceState.DISCONNECTED
+        );
+        states.forEach(status -> Assertions.assertTrue(Service.ServiceState.CREATED.isValidTransition(status)));
+    }
+
+    @Test
     void shouldReturnValidTransitionForRunning() {
         List<Service.ServiceState> states = List.of(
             Service.ServiceState.RUNNING,
