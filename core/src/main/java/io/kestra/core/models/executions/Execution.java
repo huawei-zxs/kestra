@@ -729,9 +729,7 @@ public class Execution implements DeletedInterface, TenantInterface {
 
         Map<String, Object> result = new HashMap<>();
         for (TaskRun current : this.taskRunList) {
-            if (current.getOutputs() != null) {
-                result = MapUtils.merge(result, outputs(current, byIds));
-            }
+            result = MapUtils.merge(result, outputs(current, byIds));
         }
 
         return result;

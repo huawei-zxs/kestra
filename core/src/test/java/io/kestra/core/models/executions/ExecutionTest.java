@@ -161,4 +161,16 @@ class ExecutionTest {
         assertThat(execution.getLabels().size(), is(1));
         assertThat(execution.getLabels().getFirst(), is(new Label("test", "test-value")));
     }
+
+    @Test
+    void outputsWithTaskRunWithoutOutputs() {
+        Execution execution = Execution.builder()
+            .taskRunList(Collections.singletonList(TASK_RUN
+                .state(new State(State.Type.SUCCESS, new State()))
+                .build())
+            )
+            .build();
+
+        assertThat(execution.outputs(), is(Collections.<String, Object>emptyMap()));
+    }
 }
