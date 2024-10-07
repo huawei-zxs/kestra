@@ -567,11 +567,6 @@ public class Execution implements DeletedInterface, TenantInterface {
             return true;
         }
 
-        // same status
-        if (current.getState().getCurrent() == taskRun.getState().getCurrent()) {
-            return false;
-        }
-
         // failedExecutionFromExecutor call before, so the workerTaskResult
         // don't have changed to failed but taskRunList will contain a failed
         // same for restart, the CREATED status is directly on execution taskrun

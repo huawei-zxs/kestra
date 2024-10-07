@@ -129,6 +129,24 @@ class ExecutionTest {
         ), is(true));
     }
 
+
+    @Test
+    void hasTaskRunJoinableDuplicateWorkerTaskResult() {
+        // A worker task result carrying the same state as the already joined task run
+        // (e.g. a duplicate queue message or a re-sent result) must not be joined again.
+        Execution execution = Execution.builder()
+            .taskRunList(Collections.singletonList(TASK_RUN
+                .state(new State(State.Type.RUNNING, new State()))
+                .build())
+            )
+            .build();
+
+        assertThat(execution.hasTaskRunJoinable(TASK_RUN
+            .state(new State(State.Type.RUNNING, new State()))
+            .build()
+        ), is(false));
+    }
+
     @Test
     void originalId() {
         Execution execution = Execution.builder()
