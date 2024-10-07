@@ -13,6 +13,9 @@ public class InstanceService {
     @Inject
     private SettingRepositoryInterface settingRepository;
 
+    @Inject
+    private CollectorService collectorService;
+
     private Setting instanceIdSetting;
 
     public String fetch() {
