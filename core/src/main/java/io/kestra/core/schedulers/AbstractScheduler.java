@@ -655,7 +655,7 @@ public abstract class AbstractScheduler implements Scheduler, Service {
             );
         }
 
-        return false;
+        return true;
     }
 
     private void log(SchedulerExecutionWithTrigger executionWithTrigger) {
