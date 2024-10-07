@@ -31,7 +31,7 @@ public class KVStoreService {
     public KVStore get(String tenant, String namespace, @Nullable String fromNamespace) {
 
         // Only check namespace existence if not a descendant
-        boolean checkIfNamespaceExists = fromNamespace == null || isNotParentNamespace(namespace, fromNamespace);
+        boolean checkIfNamespaceExists = isNotParentNamespace(namespace, fromNamespace);
 
         if (checkIfNamespaceExists && !namespaceService.isNamespaceExists(tenant, namespace)) {
             throw new KVStoreException(String.format(
