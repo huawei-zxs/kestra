@@ -90,6 +90,7 @@ class MapUtilsTest {
         Assertions.assertEquals("v2", results.get("k1"));
         Assertions.assertEquals("v2", results.get("k2"));
         Assertions.assertEquals("v2", results.get("k3"));
+        Assertions.assertTrue(results.containsKey("k4"));
         Assertions.assertNull(results.get("k4"));
     }
 

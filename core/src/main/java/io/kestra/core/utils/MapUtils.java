@@ -129,6 +129,7 @@ public class MapUtils {
     public static Map<String, Object> mergeWithNullableValues(final Map<String, Object>...maps) {
         return Arrays.stream(maps)
             .flatMap(map -> map.entrySet().stream())
+            .filter(entry -> entry.getValue() != null)
             // https://bugs.openjdk.org/browse/JDK-8148463
             .collect(HashMap::new, (m, v) -> m.put(v.getKey(), v.getValue()), HashMap::putAll);
     }
