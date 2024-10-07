@@ -117,6 +117,35 @@ class MapUtilsTest {
     }
 
     @Test
+    void mergeWithNullFirstArgument() {
+        Map<String, Object> b = Map.of(
+            "string", "b",
+            "map", Map.of("nested", "value")
+        );
+
+        Map<String, Object> merge = MapUtils.merge(null, b);
+
+        assertThat(merge, is(b));
+    }
+
+    @Test
+    void mergeWithNullSecondArgument() {
+        Map<String, Object> a = Map.of(
+            "string", "a",
+            "list", List.of(1, 2)
+        );
+
+        Map<String, Object> merge = MapUtils.merge(a, null);
+
+        assertThat(merge, is(a));
+    }
+
+    @Test
+    void mergeWithBothNull() {
+        assertThat(MapUtils.merge(null, null), nullValue());
+    }
+
+    @Test
     void shouldThrowExceptionWhenNestingMapGivenFlattenMapWithConflicts() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             MapUtils.flattenToNestedMap(Map.of(

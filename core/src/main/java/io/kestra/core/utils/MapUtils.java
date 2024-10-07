@@ -13,18 +13,6 @@ import java.util.TreeMap;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class MapUtils {
     public static Map<String, Object> merge(Map<String, Object> a, Map<String, Object> b) {
-        if (a == null && b == null) {
-            return null;
-        }
-
-        if (a == null || a.isEmpty()) {
-            return copyMap(b);
-        }
-
-        if (b == null || b.isEmpty()) {
-            return copyMap(a);
-        }
-
         Map copy = copyMap(a);
 
         Map<String, Object> copyMap = b
