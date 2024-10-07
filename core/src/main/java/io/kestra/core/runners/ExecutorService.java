@@ -95,7 +95,7 @@ public class ExecutorService {
                         .tenantId(flow.getTenantId())
                         .namespace(flow.getNamespace())
                         .flowId(flow.getId())
-                        .execution(newExecution)
+                        .execution(execution)
                         .concurrencyState(ExecutionRunning.ConcurrencyState.QUEUED)
                         .build();
 
