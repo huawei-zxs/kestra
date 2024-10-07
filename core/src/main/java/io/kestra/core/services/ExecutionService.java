@@ -190,7 +190,7 @@ public class ExecutionService {
             .childExecution(
                 newExecutionId,
                 newTaskRuns,
-                execution.withState(State.Type.RESTARTED).getState()
+                State.of(State.Type.RESTARTED, execution.getState().getHistories())
             );
 
         newExecution = newExecution.withMetadata(execution.getMetadata().nextAttempt());
