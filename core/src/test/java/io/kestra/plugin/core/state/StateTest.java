@@ -96,6 +96,40 @@ class StateTest {
     }
 
     @Test
+    void setMerge() throws Exception {
+        String stateName = IdUtils.create();
+        Set set = Set.builder()
+            .id(IdUtils.create())
+            .type(Set.class.toString())
+            .name(stateName)
+            .data(Map.of("first", "1"))
+            .build();
+        RunContext runContext = TestsUtils.mockRunContext(runContextFactory, set, Map.of());
+
+        Set.Output setOutput = set.run(runContext);
+        assertThat(setOutput.getCount(), is(1));
+
+        set = Set.builder()
+            .id(IdUtils.create())
+            .type(Set.class.toString())
+            .name(stateName)
+            .data(Map.of("second", "2"))
+            .build();
+        setOutput = set.run(runContext);
+        assertThat(setOutput.getCount(), is(2));
+
+        Get get = Get.builder()
+            .id(IdUtils.create())
+            .type(Get.class.toString())
+            .name(stateName)
+            .build();
+        Get.Output getOutput = get.run(runContext);
+        assertThat(getOutput.getCount(), is(2));
+        assertThat(getOutput.getData().get("first"), is("1"));
+        assertThat(getOutput.getData().get("second"), is("2"));
+    }
+
+    @Test
     void deleteThrow() {
         Delete task = Delete.builder()
             .id(IdUtils.create())
