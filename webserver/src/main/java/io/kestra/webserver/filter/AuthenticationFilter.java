@@ -53,7 +53,7 @@ public class AuthenticationFilter implements HttpServerFilter {
                 BasicAuthService.SaltedBasicAuthConfiguration basicAuthConfiguration = this.basicAuthService.configuration();
                 boolean isOpenUrl = Optional.ofNullable(basicAuthConfiguration.getOpenUrls())
                     .map(Collection::stream)
-                    .map(stream -> stream.anyMatch(s -> request.getPath().startsWith(s)))
+                    .map(stream -> stream.anyMatch(s -> request.getPath().equals(s)))
                     .orElse(false);
 
                 if (isOpenUrl || isManagementEndpoint(request)) {

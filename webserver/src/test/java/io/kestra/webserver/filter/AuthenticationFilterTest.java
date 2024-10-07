@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @KestraTest
@@ -57,5 +58,18 @@ class AuthenticationFilterTest {
             ));
 
         assertThat(response.getStatus(), is(HttpStatus.OK));
+    }
+    @Test
+    void testOpenUrlPrefixMatch() {
+        // "/api/v1/executions/webhook/" is configured as an open URL (prefix match),
+        // so webhook trigger endpoints must remain reachable without basic auth credentials
+        try {
+            client.toBlocking()
+                .exchange("/api/v1/executions/webhook/io.kestra.tests/webhook/some-key");
+            // request passed the authentication filter
+        } catch (HttpClientResponseException e) {
+            // whatever the outcome (404, ...), it must not be an authentication rejection
+            assertThat(e.getStatus(), is(not(HttpStatus.UNAUTHORIZED)));
+        }
     }
 }
