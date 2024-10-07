@@ -58,7 +58,7 @@ public class H2Queue<T> extends JdbcQueue<T> {
             .where(AbstractJdbcRepository.field("type").eq(this.cls.getName()))
             .and(DSL.or(List.of(
                 AbstractJdbcRepository.field("consumers").isNull(),
-                DSL.condition("NOT(ARRAY_CONTAINS(\"consumers\", ?))", queueType)
+                DSL.condition("NOT(ARRAY_CONTAINS(\"consumers\", ?)", queueType)
             )));
 
         if (consumerGroup != null) {
