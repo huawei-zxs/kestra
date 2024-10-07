@@ -620,7 +620,6 @@ public class ExecutionService {
             .stream()
             .filter(task -> task instanceof AbstractGraphTask)
             .map(task -> (AbstractGraphTask) task)
-            .filter(task -> task.getTaskRun() != null)
             .filter(s -> !workerTaskRunId.contains(s.getTaskRun().getId()))
             .map(s -> mappingTaskRunId.get(s.getTaskRun().getId()))
             .collect(Collectors.toSet());
