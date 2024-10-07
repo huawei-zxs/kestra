@@ -329,6 +329,17 @@ class ExecutionServiceTest extends AbstractMemoryRunnerTest {
     }
 
     @Test
+    void executionShouldTransitionToRunningWhenFlowStarts() throws TimeoutException, QueueException {
+        Execution execution = runnerUtils.runOne(null, "io.kestra.tests", "logs");
+
+        assertThat(execution.getState().getCurrent(), is(State.Type.SUCCESS));
+        assertThat(
+            execution.getState().getHistories().stream().map(State.History::getState).toList(),
+            hasItems(State.Type.CREATED, State.Type.RUNNING)
+        );
+    }
+
+    @Test
     void deleteExecution() throws TimeoutException, QueueException, IOException {
         Execution execution = runnerUtils.runOne(null, "io.kestra.tests", "logs");
         assertThat(execution.getState().getCurrent(), is(State.Type.SUCCESS));

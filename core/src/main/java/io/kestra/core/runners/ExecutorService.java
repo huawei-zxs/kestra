@@ -197,7 +197,7 @@ public class ExecutorService {
         // update Execution
         newExecution = execution.withTaskRunList(executionTasksRun);
 
-        if (execution.getState().getCurrent() == State.Type.CREATED) {
+        if (execution.getState().getCurrent() == State.Type.RUNNING) {
             metricRegistry
                 .counter(MetricRegistry.EXECUTOR_EXECUTION_STARTED_COUNT, metricRegistry.tags(execution))
                 .increment();
