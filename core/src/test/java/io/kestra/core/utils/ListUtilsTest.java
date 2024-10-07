@@ -1,5 +1,6 @@
 package io.kestra.core.utils;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -21,6 +22,13 @@ class ListUtilsTest {
         list = ListUtils.emptyOnNull(List.of("1"));
         assertThat(list, notNullValue());
         assertThat(list.size(), is(1));
+    }
+
+    @Test
+    void shouldReturnEmptyListOnNull() {
+        // the returned list must be non-null and directly usable: streaming or sizing it must not throw
+        Assertions.assertDoesNotThrow(() -> ListUtils.emptyOnNull(null).stream().count());
+        Assertions.assertEquals(0, ListUtils.emptyOnNull(null).size());
     }
 
     @Test
