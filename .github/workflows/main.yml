@@ -123,7 +123,7 @@ jobs:
 
       # Docker Build
       - name: Build & Export Docker Image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         if: "!startsWith(github.ref, 'refs/tags/v')"
         with:
           context: .
@@ -361,7 +361,7 @@ jobs:
 
       # Docker Build and push
       - name: Build Docker Image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: true
