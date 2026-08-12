@@ -38,12 +38,12 @@ jobs:
     steps:
       # Checkout kestra
       - name: Checkout kestra
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           path: kestra
 
       # Checkout GitHub Actions
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: kestra-io/actions
           path: actions

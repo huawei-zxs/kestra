@@ -14,12 +14,12 @@ jobs:
     timeout-minutes: 60
     steps:
       # Checkout
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       # Checkout GitHub Actions
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: kestra-io/actions
           path: actions
