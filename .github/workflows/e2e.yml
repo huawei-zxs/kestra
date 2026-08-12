@@ -59,7 +59,7 @@ jobs:
       # Get Docker Image
       - name: Download Kestra Image
         if: inputs.docker-artifact-name != ''
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.docker-artifact-name }}
           path: /tmp
