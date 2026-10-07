@@ -139,19 +139,19 @@ jobs:
 
       # Upload artifacts
       - name: Upload JAR
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: jar
           path: build/libs/
 
       - name: Upload Executable
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: exe
           path: build/executable/
 
       - name: Upload Docker
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: "!startsWith(github.ref, 'refs/tags/v')"
         with:
           name: ${{ steps.vars.outputs.artifact }}
